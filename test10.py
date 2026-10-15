@@ -447,14 +447,14 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype=torch.float16,   # or float32 if no FP16 support
+        dtype=torch.float16,   # or float32 if no FP16 support
         device_map="cpu",            # place model on CPU
         low_cpu_mem_usage=True
     )
 
     gen = PersianPoemGenerator(model, tokenizer, generator)
     verses = gen.generate_verse(
-        prompt='شب', 
+        prompt='شعری در قالب سنتی با سبک حافظ. واژگان مورد استفاده واژگان شعر حافظ باشد. صنایع ادبی را مشابه حافظ تولید کن.', 
         target_meter=['long', 'short', 'long', 'long'],
         beam_width=5
     )
